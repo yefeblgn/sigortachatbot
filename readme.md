@@ -46,13 +46,14 @@ Hasar sorgu, kasko & trafik teklifi; müşteri tanıma ve canlı chat kutusu ile
 
 ---
 
-## 🏗 Mimari
+## 🧩 Mimari
 
+```bash
 FastAPI (Python)
 ├─ /chat ← Gemini yönlendirme + payload doğrulama
-│ └─ PHP API'ye GET → hasar_detay (TCKN)
-│ └─ MySQL (sigorta_chatbot)
-└─ /swagger (OpenAPI UI)
+│  ├─ PHP API'ye GET → hasar_detay (TCKN)
+│  ├─ MySQL (sigorta_chatbot)
+│  └─ /swagger (OpenAPI UI)
 
 PHP API (api.php)
 ├─ /api.php?table=musteri
@@ -60,10 +61,8 @@ PHP API (api.php)
 └─ /api.php?table=hasar_detay&tckn=... ← JOIN + son kayıt
 
 Static Frontend
-└─ app/static/index.html ← Chat bubble, iki baloncuk desteği
-
-
----
+└─ app/static/index.html ← Chat bubble + çift baloncuk desteği
+```
 
 ## Kurulum (Hızlı Başlangıç)
 
