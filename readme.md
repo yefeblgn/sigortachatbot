@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛡️ BlaBla Sigorta – Gemini Chatbot
+# Gemini Destekli Sigorta Chat Botu
 
 **FastAPI + Google Gemini + PHP/MySQL**  
 Hasar sorgu, kasko & trafik teklifi; müşteri tanıma ve canlı chat kutusu ile tam entegre demo.
