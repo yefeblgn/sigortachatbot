@@ -39,9 +39,7 @@ Hasar sorgu, kasko & trafik teklifi; müşteri tanıma ve canlı chat kutusu ile
 ## 🚀 Özellikler
 - **Niyet Algılama & Yönlendirme:** `general → hasar_sorgula / kasko_teklif / trafik_teklif / off_topic`
 - **Müşteri Tanıma:** TCKN ile `hasar_detay` sorgusu (PHP API + MySQL JOIN)
-- **Çift Baloncuk Yanıtı:** İlk baloncuk “bilgiler alındı”, ikinci baloncuk **API’den gelen detay** (`follow_up`)
 - **Swagger Dokümantasyon:** FastAPI (`/swagger`) + PHP API (`swagger.html`)
-- **Sade Modern UI:** `app/static/index.html` – açık tema, smooth chat, unread badge
 - **Configurable:** `.env` ile `GEMINI_API_KEY`, `API_BASE`, CORS, model adı…
 
 ---
