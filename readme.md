@@ -59,7 +59,7 @@ PHP API (api.php)
 └─ /api.php?table=hasar_detay&tckn=... ← JOIN + son kayıt
 
 Static Frontend
-└─ app/static/index.html ← Chat bubble + çift baloncuk desteği
+└─ app/static/index.html ← Demo sitesi
 ```
 
 ## Kurulum (Hızlı Başlangıç)
