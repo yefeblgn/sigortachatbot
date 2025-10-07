@@ -78,9 +78,8 @@ cp .env.example .env
 # dev sunucu
 python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 # http://localhost:8000/swagger
+```
 
-<p> <a href="https://open.spotify.com/user/eey50kcey2qy4pnn7xpyr54a2"> <img src="https://spotify-github-profile.kittinanx.com/api/view?uid=eey50kcey2qy4pnn7xpyr54a2&cover_image=true&theme=default&show_offline=false&background_color=ffffff&bar_color=53b14f&bar_color_cover=true" />
-
-<p> <a href="mailto:ucarkacar231415@gmail.com"><img src="https://img.shields.io/badge/E--mail-Contact-informational?logo=gmail&logoColor=white" /></a> <a href="https://www.yefeblgn.net.com"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?logo=linkedin&logoColor=white" /></a> <a href="https://x.com/yefeblgn"><img src="https://img.shields.io/badge/Twitter-@yefeblgn-1DA1F2?logo=x&logoColor=white" /></a> </p>
+<p> <a href="mailto:ucarkacar231415@gmail.com"><img src="https://img.shields.io/badge/E--mail-Contact-informational?logo=gmail&logoColor=white" /></a> <a href="https://x.com/yefeblgn"><img src="https://img.shields.io/badge/Twitter-@yefeblgn-1DA1F2?logo=x&logoColor=white" /></a> </p>
 
 
