@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BlaBla Sigorta — Hızlı ve Güvenilir</title>
+  <meta name="description" content="BlaBla Sigorta ile trafik, kasko ve sağlık sigortalarında hızlı teklif ve şeffaf süreç." />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <style>
+    :root{
+      --bg:#f7f8fb;        /* Arkaplan */
+      --surface:#ffffff;   /* Kart/Panel */
+      --line:#e5e7eb;      /* Çizgi */
+      --ink:#0f172a;       /* Metin (koyu) */
+      --muted:#6b7280;     /* İkincil metin */
+      --primary:#2563eb;   /* Ana renk (soft mavi) */
+      --primary-ink:#ffffff;
+      --accent:#0ea5e9;    /* İnce vurgu */
+      --shadow:0 8px 30px rgba(15, 23, 42, .06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter, Segoe UI, system-ui, Arial; color:var(--ink);
+      background:var(--bg);
+    }
+
+    /* ---------- Header ---------- */
+    .topbar{
+      background:#0f172a; color:#e5e7eb; font-size:13px;
+    }
+    .topbar .wrap{
+      max-width:1200px; margin:0 auto; padding:8px 16px; display:flex; justify-content:space-between; gap:12px;
+    }
+    header{
+      position:sticky; top:0; z-index:40; background:var(--surface); border-bottom:1px solid var(--line);
+      backdrop-filter: blur(6px);
+    }
+    .nav{
+      max-width:1200px; margin:0 auto; padding:14px 16px; display:flex; align-items:center; gap:18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+      background:#e8eefc; color:#1d4ed8; border:1px solid #dbe3ff;
+    }
+    .nav a{
+      color:var(--ink); text-decoration:none; font-weight:600; margin-left:10px;
+    }
+    .nav a:hover{ color:#1d4ed8 }
+    .spacer{flex:1}
+    .cta{
+      display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:10px; border:1px solid var(--line);
+      background:var(--surface); color:var(--ink); font-weight:700; text-decoration:none;
+    }
+    .cta.primary{
+      background:var(--primary); color:var(--primary-ink); border-color:transparent;
+    }
+    .cta.primary:hover{ filter:brightness(1.03) }
+    .cta:hover{ box-shadow:var(--shadow) }
+
+    /* ---------- Hero ---------- */
+    .hero{
+      max-width:1200px; margin:30px auto; padding:0 16px; display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:center;
+    }
+    @media (max-width:960px){ .hero{grid-template-columns:1fr} }
+    .hero .panel{
+      background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; box-shadow:var(--shadow);
+    }
+    .eyebrow{display:inline-block; padding:6px 10px; border-radius:999px; background:#e9f0ff; color:#1d4ed8; font-weight:700; font-size:12px}
+    .h1{font-size:40px; line-height:1.15; margin:10px 0}
+    .lead{color:var(--muted); font-size:18px; line-height:1.7}
+    .actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap}
+
+    .heroimg{
+      position:relative; border-radius:16px; overflow:hidden; min-height:320px; border:1px solid var(--line);
+      background:#eef2ff;
+    }
+    .heroimg img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      filter:saturate(1.05) contrast(1.02);
+    }
+
+    /* ---------- Sections ---------- */
+    .section{max-width:1200px; margin:40px auto; padding:0 16px}
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    @media (max-width:960px){ .grid{grid-template-columns:1fr 1fr} }
+    @media (max-width:640px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; box-shadow:var(--shadow);
+      display:flex; flex-direction:column; gap:8px; min-height:120px;
+    }
+    .card h3{margin:4px 0 0}
+    .muted{color:var(--muted)}
+    .list{display:grid; gap:10px; margin:6px 0}
+    .bullet{display:flex; gap:10px; align-items:flex-start}
+
+    /* Steps */
+    .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+    @media (max-width:960px){ .steps{grid-template-columns:1fr 1fr} }
+    @media (max-width:560px){ .steps{grid-template-columns:1fr} }
+    .step{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px; box-shadow:var(--shadow)}
+    .step .num{width:28px;height:28px;border-radius:999px;background:#eff6ff;color:#1d4ed8;display:grid;place-items:center;font-weight:800}
+
+    /* Footer */
+    footer{border-top:1px solid var(--line); margin-top:50px; background:var(--surface)}
+    .foot{max-width:1200px; margin:0 auto; padding:22px 16px; color:var(--muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px}
+
+    /* ---------- Chat Floating ---------- */
+    .fab{
+      position:fixed; right:22px; bottom:22px; width:60px; height:60px; border-radius:50%;
+      background:var(--primary); color:var(--primary-ink); display:grid; place-items:center; cursor:pointer; z-index:60;
+      box-shadow:var(--shadow);
+      transition:transform .15s ease, filter .2s ease;
+    }
+    .fab:hover{ filter:brightness(1.05) }
+    .fab:active{ transform:translateY(1px) }
+    .fab .badge{ position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; padding:0 6px;
+      display:none; place-items:center; background:#ef4444; color:#fff; border-radius:999px; font-size:12px; font-weight:800; box-shadow:var(--shadow) }
+
+    .chat{
+      position:fixed; right:22px; bottom:92px; width:360px; max-width:calc(100vw - 44px);
+      background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:var(--shadow);
+      transform-origin: 95% 100%; transform: translateY(12px) scale(.98); opacity:0; pointer-events:none;
+      transition: transform .22s cubic-bezier(.2,.7,.2,1), opacity .2s ease; z-index:50;
+    }
+    .chat.open{ transform: translateY(0) scale(1); opacity:1; pointer-events:auto; }
+    .chat-h{ padding:12px 14px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; background:#f8fafc }
+    .chat-h strong{ font-weight:800 }
+    .chat-b{ height:420px; overflow:auto; padding:14px; background:#f9fafb }
+    .chat-b::-webkit-scrollbar{ width:8px } .chat-b::-webkit-scrollbar-thumb{ background:#d4d7de; border-radius:10px }
+    .msg{ max-width:78%; margin:8px 0; padding:10px 14px; border-radius:14px; line-height:1.5; font-size:14px; white-space:pre-wrap; word-wrap:break-word; }
+    .bot{ background:#eef2ff; border:1px solid #dbe3ff; color:#0f172a }
+    .user{ margin-left:auto; color:#fff; background:var(--primary); }
+    .typing{ color:#334155; font-style:italic; background:#f1f5f9; border:1px solid #e2e8f0 }
+    .chat-f{ display:flex; gap:8px; padding:10px; border-top:1px solid var(--line); background:#fff }
+    .chat-f input{ flex:1; padding:12px; border:1px solid #d1d5db; border-radius:10px; outline:none }
+    .chat-f input:focus{ border-color:#93c5fd; box-shadow:0 0 0 2px rgba(37,99,235,.12) }
+    .chat-f button{ padding:0 16px; border:none; border-radius:10px; background:var(--primary); color:#fff; font-weight:800; cursor:pointer }
+    .helper{ display:flex; flex-wrap:wrap; gap:8px; border-top:1px solid var(--line); background:#f8fafc; padding:10px 12px }
+    .helper button{ padding:8px 10px; border-radius:999px; border:1px solid var(--line); background:#fff; cursor:pointer }
+    .helper button:hover{ border-color:#93c5fd }
+  </style>
+</head>
+<body>
+
+  <!-- Üst bilgi -->
+  <div class="topbar">
+    <div class="wrap">
+      <div>📞 0850 000 00 00</div>
+      <div>✉️ destek@blabla-sigorta.com</div>
+    </div>
+  </div>
+
+  <!-- Header / Navigasyon -->
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">🛡️</div>
+        <span>BlaBla Sigorta</span>
+      </div>
+      <a href="#urunler">Ürünler</a>
+      <a href="#neden">Neden Biz?</a>
+      <a href="#surec">Süreç</a>
+      <a href="#iletisim">İletişim</a>
+      <div class="spacer"></div>
+      <a class="cta" href="#teklif">Trafik Teklifi</a>
+      <a class="cta primary" href="#teklif">Kasko Teklifi</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="panel">
+      <span class="eyebrow">Dijital Sigortacılık</span>
+      <h1 class="h1">Ekonomik Fiyat • Şeffaf Süreç • Hızlı Sonuç</h1>
+      <p class="lead">Trafik ve kasko sigortası tekliflerini dakikalar içinde alın. Hasar dosyası durumunuzu anında öğrenin — hepsi tek ekranda, net ve sade.</p>
+      <div class="actions">
+        <a class="cta primary" href="#teklif" onclick="openChat()">Hemen Teklif Al</a>
+        <a class="cta" href="#neden">Detayları Gör</a>
+      </div>
+    </div>
+    <div class="heroimg">
+      <img alt="Araç sigortası" src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?q=80&w=1600&auto=format&fit=crop" />
+    </div>
+  </section>
+
+  <!-- Ürünler -->
+  <section id="urunler" class="section">
+    <h2 style="margin:0 0 14px">Ürünlerimiz</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Trafik Sigortası</h3>
+        <p class="muted">Zorunlu trafik sigortasında farklı şirketlerden fiyat karşılaştırması.</p>
+      </div>
+      <div class="card">
+        <h3>Kasko Sigortası</h3>
+        <p class="muted">Aracınıza özel geniş teminatlı kasko poliçeleri.</p>
+      </div>
+      <div class="card">
+        <h3>Tamamlayıcı Sağlık</h3>
+        <p class="muted">Anlaşmalı özel hastanelerde hesaplı sağlık güvencesi.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Neden Biz -->
+  <section id="neden" class="section">
+    <h2 style="margin:0 0 14px">Neden BlaBla Sigorta?</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Şeffaf Fiyatlama</h3>
+        <div class="list">
+          <div class="bullet"><span>•</span><span>Tek ekranda çoklu teklif karşılaştırma.</span></div>
+          <div class="bullet"><span>•</span><span>Ek ücret/masraf sürprizi yok.</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Hızlı Süreç</h3>
+        <div class="list">
+          <div class="bullet"><span>•</span><span>Hasar sorgusu anlık sonuç.</span></div>
+          <div class="bullet"><span>•</span><span>Onay ve poliçe e-posta/SMS ile.</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>7/24 Destek</h3>
+        <div class="list">
+          <div class="bullet"><span>•</span><span>Uzman danışman ekibi.</span></div>
+          <div class="bullet"><span>•</span><span>Chat asistanı ile hızlı yanıt.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Süreç -->
+  <section id="surec" class="section">
+    <h2 style="margin:0 0 14px">3 Adımda Teklif</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div style="margin-top:8px;font-weight:700">Bilgileri Gir</div><div class="muted">TCKN, plaka ve model bilgisi.</div></div>
+      <div class="step"><div class="num">2</div><div style="margin-top:8px;font-weight:700">Teklifleri Gör</div><div class="muted">Şirketleri karşılaştır.</div></div>
+      <div class="step"><div class="num">3</div><div style="margin-top:8px;font-weight:700">Onayla</div><div class="muted">Poliçe anında e-postanda.</div></div>
+      <div class="step"><div class="num">★</div><div style="margin-top:8px;font-weight:700">Canlı Destek</div><div class="muted">Soruların için chat her zaman burada.</div></div>
+    </div>
+  </section>
+
+  <!-- İletişim -->
+  <section id="iletisim" class="section">
+    <h2 style="margin:0 0 14px">İletişim</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Merkez Ofis</h3>
+        <p class="muted">Yeni Mah. Güvence Sk. No:10 Kat:3 Beşiktaş / İstanbul</p>
+        <p class="muted">0850 000 00 00 • destek@blabla-sigorta.com</p>
+      </div>
+      <div class="card">
+        <h3>Form</h3>
+        <form onsubmit="event.preventDefault(); alert('Talebiniz alındı. En kısa sürede dönüş yapacağız.'); this.reset();">
+          <input style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px" placeholder="Ad Soyad" required />
+          <input style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px" type="email" placeholder="E-posta" required />
+          <textarea style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;height:90px" placeholder="Mesajınız..." required></textarea>
+          <div style="margin-top:10px"><button class="cta primary" type="submit">Gönder</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot">
+      <div>© 2025 BlaBla Sigorta</div>
+      <div class="muted">KVKK • Aydınlatma Metni • Kullanım Koşulları</div>
+    </div>
+  </footer>
+
+  <!-- Chat FAB -->
+  <button id="fab" class="fab" aria-label="Sohbeti aç/kapat" onclick="toggleChat()">
+    💬
+    <span id="badge" class="badge">1</span>
+  </button>
+
+  <!-- Chat Panel -->
+  <div id="chat" class="chat" aria-live="polite" aria-label="Sohbet paneli">
+    <div class="chat-h">
+      <strong>BlaBla Sigorta Asistan</strong>
+      <div>
+        <button class="cta" style="padding:6px 10px" onclick="clearChat()">Temizle</button>
+        <button class="cta" style="padding:6px 10px" onclick="toggleChat()">Kapat</button>
+      </div>
+    </div>
+
+    <div id="chatBody" class="chat-b"></div>
+
+    <div class="helper">
+      <button onclick="quick('Hasar sorgu yapmak istiyorum')">Hasar Sorgu</button>
+      <button onclick="quick('Kasko teklifi yapmak istiyorum')">Kasko Teklifi</button>
+      <button onclick="quick('Trafik sigortası teklifi yapmak istiyorum')">Trafik Teklifi</button>
+    </div>
+
+    <div class="chat-f">
+      <input id="msg" type="text" placeholder="Mesajınızı yazın..." onkeydown="if(event.key==='Enter') sendMsg()" />
+      <button onclick="sendMsg()">Gönder</button>
+    </div>
+  </div>
+
+  <script>
+    const CHAT_API_BASE = ""; // örn. "https://your-domain.com"
+    const CHAT_ENDPOINT = (CHAT_API_BASE || "") + "/chat";
+
+    const panel = document.getElementById('chat');
+    const badge = document.getElementById('badge');
+    const bodyEl = document.getElementById('chatBody');
+    const input = document.getElementById('msg');
+    let unread = 0;
+
+    function toggleChat(){
+      const opened = panel.classList.toggle('open');
+      if(opened){ unread = 0; updateBadge(); scrollDown(); }
+    }
+    function openChat(){ if(!panel.classList.contains('open')) toggleChat(); }
+    function updateBadge(){ badge.style.display = unread>0 ? 'grid' : 'none'; badge.textContent = unread; }
+    function clearChat(){ localStorage.removeItem('blabla_chat'); initChat(); }
+    function quick(t){ openChat(); input.value = t; input.focus(); }
+
+    function addMsg(text, who='bot', persist=true){
+      const d = document.createElement('div');
+      d.className = 'msg ' + who;
+      d.innerText = text;
+      bodyEl.appendChild(d);
+      if(persist) saveHistory();
+      scrollDown();
+    }
+    function scrollDown(){ bodyEl.scrollTop = bodyEl.scrollHeight; }
+    function saveHistory(){
+      const items = [...bodyEl.querySelectorAll('.msg')].map(m=>({t:m.innerText, w:m.classList.contains('user')?'user':'bot'}));
+      localStorage.setItem('blabla_chat', JSON.stringify(items));
+    }
+    function initChat(){
+      bodyEl.innerHTML = '';
+      const saved = JSON.parse(localStorage.getItem('blabla_chat') || '[]');
+      if(saved.length){
+        for(const m of saved) addMsg(m.t, m.w, false);
+      }else{
+        addMsg('Merhaba 👋\nHasar sorgu, kasko ve trafik tekliflerinde yardımcı olabilirim.\nÖrn: "Hasar sorgu — TCKN 12345678901, dosya 2387175"', 'bot');
+      }
+      scrollDown();
+      unread = 0; updateBadge();
+    }
+
+    async function sendMsg(){
+      const text = input.value.trim();
+      if(!text) return;
+      addMsg(text, 'user');
+      input.value = '';
+      const typing = document.createElement('div');
+      typing.className = 'msg typing';
+      typing.innerText = 'Yazıyor...';
+      bodyEl.appendChild(typing); scrollDown();
+
+      try{
+        const resp = await fetch(CHAT_ENDPOINT, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ type:'general', text })
+        });
+
+        let data;
+        try{ data = await resp.json(); }catch{ data = null; }
+
+        typing.remove();
+
+        if(!resp.ok){
+          const detail = (data && (data.detail || data.message)) || resp.statusText || 'Hata';
+          addMsg('❌ Sunucu hatası: ' + detail, 'bot');
+          if(!panel.classList.contains('open')) { unread++; updateBadge(); }
+          return;
+        }
+
+        const m1 = (data && data.message) || 'Yanıt üretilemedi.';
+        addMsg(m1, 'bot');
+        if(data && data.follow_up){ addMsg(data.follow_up, 'bot'); }
+
+        if(!panel.classList.contains('open')) { unread++; updateBadge(); }
+      }catch(err){
+        typing.remove();
+        addMsg('❌ Bağlantı sağlanamadı. Lütfen tekrar deneyin.', 'bot');
+        if(!panel.classList.contains('open')) { unread++; updateBadge(); }
+      }
+    }
+
+    initChat();
+  </script>
+</body>
+</html>

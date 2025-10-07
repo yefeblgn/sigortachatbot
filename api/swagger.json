@@ -1,0 +1,155 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Sigorta Chatbot API",
+    "description": "Gemini destekli sigorta sistemi için REST API dokümantasyonu.<br>Veritabanı: <b>sigorta_chatbot</b><br>Yönetici: <b>yefeblgn</b>",
+    "version": "2.0.0",
+    "contact": {
+      "name": "Efe Bilgin",
+      "url": "https://yefeblgn.net",
+      "email": "ucarkacar231415@gmail.com"
+    }
+  },
+  "servers": [
+    { "url": "https://localhost:8000/api/", "description": "by yefeblgn" }
+  ],
+  "paths": {
+    "/api.php": {
+      "get": {
+        "summary": "Tüm veritabanı tablolarını sorgular",
+        "description": "Parametre olarak `table` (zorunlu) ve `id` (opsiyonel) alınır. Geçerli tablolar: <br>`musteri`, `hasar_dosya`, `hasar_detay`, `kasko_teklif`, `trafik_teklif`, `log`, `ai_oturum`.",
+        "parameters": [
+          {
+            "name": "table",
+            "in": "query",
+            "required": true,
+            "description": "Sorgulanacak tablo adı",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "musteri",
+                "hasar_dosya",
+                "hasar_detay",
+                "kasko_teklif",
+                "trafik_teklif",
+                "ai_oturum",
+                "log"
+              ]
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "description": "Kayıt ID’si (opsiyonel)",
+            "schema": { "type": "integer" }
+          },
+          {
+            "name": "tckn",
+            "in": "query",
+            "required": false,
+            "description": "Hasar detay sorgusu için TCKN (sadece `table=hasar_detay` ile kullanılır)",
+            "schema": { "type": "string", "example": "12345678901" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı sorgu yanıtı",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Müşteri Listesi": {
+                    "value": {
+                      "success": true,
+                      "data": [
+                        {
+                          "id": 1,
+                          "ad": "Ahmet",
+                          "soyad": "Kaya",
+                          "tckn": "12345678901",
+                          "telefon": "05321234567",
+                          "email": "ahmet@example.com"
+                        }
+                      ]
+                    }
+                  },
+                  "Hasar Detayı": {
+                    "value": {
+                      "success": true,
+                      "data": {
+                        "dosya_no": "1002459",
+                        "police_no": "PLC-002-2025",
+                        "durum": "islemde",
+                        "tutanak": "hayir",
+                        "tarih": "2025-10-07 18:50:23",
+                        "ad": "Efe",
+                        "soyad": "Bilgin",
+                        "tckn": "11171570384",
+                        "telefon": "05321234567",
+                        "email": "efe@example.com"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Geçersiz tablo adı veya eksik parametre" },
+          "500": { "description": "Sunucu veya veritabanı hatası" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Musteri": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "ad": { "type": "string" },
+          "soyad": { "type": "string" },
+          "tckn": { "type": "string" },
+          "plaka": { "type": "string" },
+          "telefon": { "type": "string" },
+          "email": { "type": "string" },
+          "dogum_tarihi": { "type": "string", "format": "date" },
+          "adres": { "type": "string" },
+          "created_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "HasarDosya": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "musteri_id": { "type": "integer" },
+          "dosya_no": { "type": "string" },
+          "police_no": { "type": "string" },
+          "tutanak": { "type": "string" },
+          "durum": { "type": "string", "enum": ["acik", "islemde", "kapali"] },
+          "tarih": { "type": "string", "format": "date-time" }
+        }
+      },
+      "KaskoTeklif": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "musteri_id": { "type": "integer" },
+          "marka": { "type": "string" },
+          "model_yili": { "type": "string" },
+          "fiyat": { "type": "number" },
+          "teklif_durum": { "type": "string", "enum": ["bekliyor", "onaylandi", "reddedildi"] }
+        }
+      },
+      "TrafikTeklif": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "musteri_id": { "type": "integer" },
+          "sigorta_firmasi": { "type": "string" },
+          "fiyat": { "type": "number" },
+          "teklif_durum": { "type": "string" }
+        }
+      }
+    }
+  }
+}
