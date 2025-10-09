@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛡️ BlaBla Sigorta – Gemini Chatbot
+# Gemini Destekli Sigorta Chat Botu
 
 **FastAPI + Google Gemini + PHP/MySQL**  
 Hasar sorgu, kasko & trafik teklifi; müşteri tanıma ve canlı chat kutusu ile tam entegre demo.
@@ -39,20 +39,19 @@ Hasar sorgu, kasko & trafik teklifi; müşteri tanıma ve canlı chat kutusu ile
 ## 🚀 Özellikler
 - **Niyet Algılama & Yönlendirme:** `general → hasar_sorgula / kasko_teklif / trafik_teklif / off_topic`
 - **Müşteri Tanıma:** TCKN ile `hasar_detay` sorgusu (PHP API + MySQL JOIN)
-- **Çift Baloncuk Yanıtı:** İlk baloncuk “bilgiler alındı”, ikinci baloncuk **API’den gelen detay** (`follow_up`)
 - **Swagger Dokümantasyon:** FastAPI (`/swagger`) + PHP API (`swagger.html`)
-- **Sade Modern UI:** `app/static/index.html` – açık tema, smooth chat, unread badge
 - **Configurable:** `.env` ile `GEMINI_API_KEY`, `API_BASE`, CORS, model adı…
 
 ---
 
-## 🏗 Mimari
+## 🧩 Mimari
 
+```bash
 FastAPI (Python)
 ├─ /chat ← Gemini yönlendirme + payload doğrulama
-│ └─ PHP API'ye GET → hasar_detay (TCKN)
-│ └─ MySQL (sigorta_chatbot)
-└─ /swagger (OpenAPI UI)
+│  ├─ PHP API'ye GET → hasar_detay (TCKN)
+│  ├─ MySQL (sigorta_chatbot)
+│  └─ /swagger (OpenAPI UI)
 
 PHP API (api.php)
 ├─ /api.php?table=musteri
@@ -60,10 +59,8 @@ PHP API (api.php)
 └─ /api.php?table=hasar_detay&tckn=... ← JOIN + son kayıt
 
 Static Frontend
-└─ app/static/index.html ← Chat bubble, iki baloncuk desteği
-
-
----
+└─ app/static/index.html ← Demo sitesi
+```
 
 ## Kurulum (Hızlı Başlangıç)
 
@@ -78,9 +75,8 @@ cp .env.example .env
 # dev sunucu
 python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 # http://localhost:8000/swagger
+```
 
-<p> <a href="https://open.spotify.com/user/eey50kcey2qy4pnn7xpyr54a2"> <img src="https://spotify-github-profile.kittinanx.com/api/view?uid=eey50kcey2qy4pnn7xpyr54a2&cover_image=true&theme=default&show_offline=false&background_color=ffffff&bar_color=53b14f&bar_color_cover=true" />
-
-<p> <a href="mailto:ucarkacar231415@gmail.com"><img src="https://img.shields.io/badge/E--mail-Contact-informational?logo=gmail&logoColor=white" /></a> <a href="https://www.yefeblgn.net.com"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?logo=linkedin&logoColor=white" /></a> <a href="https://x.com/yefeblgn"><img src="https://img.shields.io/badge/Twitter-@yefeblgn-1DA1F2?logo=x&logoColor=white" /></a> </p>
+<p> <a href="mailto:ucarkacar231415@gmail.com"><img src="https://img.shields.io/badge/E--mail-Contact-informational?logo=gmail&logoColor=white" /></a> <a href="https://x.com/yefeblgn"><img src="https://img.shields.io/badge/Twitter-@yefeblgn-1DA1F2?logo=x&logoColor=white" /></a> </p>
 
 
