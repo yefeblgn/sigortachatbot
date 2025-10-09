@@ -5,7 +5,7 @@ from app.flows import (
     parse_gemini_json,
     validate_payload,
     off_topic_response,
-    format_hasar_followup,   # ← burada
+    format_hasar_followup,
 )
 from app.gemini_client import generate_json
 

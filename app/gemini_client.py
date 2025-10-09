@@ -23,11 +23,9 @@ def build_conversation(system_prompt: str, new_user_text: str):
 
 def generate_json(system_prompt: str, user_text: str):
     model = get_model()
-    # geçmişi ekliyoruz
     contents = build_conversation(system_prompt, user_text)
     resp = model.generate_content(contents)
     
-    # cevap hafızaya kaydediliyor
     add_to_history("user", user_text)
     add_to_history("model", resp.text)
 

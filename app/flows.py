@@ -3,6 +3,8 @@ import requests
 from datetime import datetime
 from app.schemas import ParsedOutput, HasarSorguPayload, KaskoTeklifPayload, TrafikTeklifPayload
 from app.config import settings
+from urllib.parse import urljoin
+import requests
 
 OFF_TOPIC_MESSAGE = (
     "Konu dışı isteğe yardımcı olamıyorum. "
@@ -52,10 +54,17 @@ FEWSHOT = [
 ]
 
 def fetch_api_data(params: dict):
+    """
+    PHP API'den veri çeker. Base URL ayarını config'den alır.
+    """
     try:
-        res = requests.get(settings.api_base, params=params, timeout=8)
+        base = settings.api_base.rstrip("/") + "/api.php"
+        res = requests.get(base, params=params, timeout=8)
         res.raise_for_status()
-        return res.json().get("data", None)
+        js = res.json()
+        if not js.get("success"):
+            print("[API WARN]", js)
+        return js.get("data", None)
     except Exception as e:
         print(f"[API ERROR] {e}")
         return None
@@ -110,7 +119,6 @@ def format_hasar_followup(tckn: str) -> str:
     tarih_str = _fmt_dt(data.get("tarih") or "")
 
     return (
-        "—\n"
         "Dosya Durumu Bilgisi\n"
         f"Dosya No: {dosya_no}\n"
         f"Poliçe No: {police_no}\n"
